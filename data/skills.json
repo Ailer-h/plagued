@@ -1,0 +1,6 @@
+{
+    "skills_base_attr": {
+        "melee_combat": "strength",
+        "ranged_combat": "agility"
+    }
+}

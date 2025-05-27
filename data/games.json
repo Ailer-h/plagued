@@ -1,0 +1,49 @@
+{
+    "Game 1": {},
+    "Game 2": {
+        "game_data": {
+            "time_played": 0
+        },
+        "player_data": {
+            "player_class": "strategist",
+            "name": "Mark Bench",
+            "max_hp": 75,
+            "current_hp": 75,
+            "lvl": 1,
+            "xp": 0,
+            "stat": {
+                "str": 1,
+                "thg": 1,
+                "int": 3,
+                "chr": 2,
+                "sns": 2,
+                "agi": 1
+            },
+            "inventory": [],
+            "skills": {}
+        }
+    },
+    "Game 3": {
+        "game_data": {
+            "time_played": 0
+        },
+        "player_data": {
+            "player_class": "ranger",
+            "name": "Penny Test",
+            "max_hp": 90,
+            "current_hp": 90,
+            "lvl": 1,
+            "xp": 0,
+            "stat": {
+                "str": 1,
+                "thg": 1,
+                "int": 2,
+                "chr": 1,
+                "sns": 2,
+                "agi": 3
+            },
+            "inventory": [],
+            "skills": {}
+        }
+    }
+}
