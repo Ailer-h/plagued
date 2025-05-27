@@ -159,10 +159,10 @@ def menu():
         print()
 
         if user_opt == 1:
-            game_data: dict = load_save()
+            return load_save()
 
         elif user_opt == 2:
-            game_data: dict = new_game()
+            return new_game()
 
         elif user_opt == 3:
             delete_save()
@@ -170,5 +170,9 @@ def menu():
         else:
             print("Quitting...")
             return
+
+# Function that runs the game
+def run_game():
+    game_data = menu()
 
 menu()
