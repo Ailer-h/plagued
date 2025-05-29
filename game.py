@@ -11,7 +11,7 @@ games_path: str = r"data/games.json"
 
 colorama.init(autoreset=True)
 
-dialogue_handler = DialogueHandler()
+dialogue_handler = DialogueHandler("./data/story/story.json")
 
 # Function responsible for getting input on player info
 # STILL GOTTA EDIT IT
@@ -105,6 +105,10 @@ def load_save() -> dict:
     print("\nSelect a slot to load.")
     selected_slot = get_int("> ", repeat=True, bounds={"min": 1, "max": len(slots)}) - 1
 
+    if not slots[list(slots.keys())[selected_slot]]:
+        print("You can't load an empty game!")
+        return load_save()
+
     return slots[list(slots.keys())[selected_slot]]
 
 # Function that prompts the user to save a char
@@ -149,7 +153,7 @@ def delete_save():
     
     
 # Function that starts the game menu
-def menu():
+def menu() -> dict | None:
 
     while True:
 
@@ -176,10 +180,13 @@ def menu():
 
 # Function that runs the game
 def run_game():
-    game_data = menu()
+    game = menu()
 
-# menu()
+    if not game:
+        return
 
-dialogue_handler.set_dialogue_path("./data/story/story.json")
-# dialogue_handler.run_dialogue("ld0001")
-dialogue_handler.get_dialogue_info("ld0001")
+    if game['game_data']['time_played'] == 0:
+        dialogue_handler.run_dialogue("ld0001")
+        dialogue_handler.run_dialogue("sd0001")
+
+run_game()

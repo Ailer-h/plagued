@@ -4,17 +4,30 @@
         "default_delay": 5,
         "text": [
             "A few years back, the world was changed forever.",
-            "In the year 2035, a mad scientist, whose name story couldn't keep, released upon the world, what would be it's ruin",
+            "In the year 2035, a mad scientist, whose name story couldn't keep, released upon the world, what would be its ruin.",
             "He was experimenting with rats and diseases in his lab when one of his subjects escaped.",
-            "That subject was infected with a disease we now call, the plague.",
+            "That subject was infected with a disease we now call, the Plague!",
             "Over the next weeks, the plague was silent, but suddenly, a boom occoured. Something that would leave the world in shambles.",
-            "The plague took over most of the people since getting it meant certain death in a few days. Hours if you wern't well already.",
+            "The plague took over most of the people since getting it meant certain death in a few days. Hours if you weren't well already.",
             "The chaos created by the plague made humanity crumble and the few that survived, created almost medieval refuges.",
             "Now, in 2050, the plague roams the edge of the world. People are too lost in their own lives to care.",
-            "Deaths are now banal and the only hysteria that was left, is the fear of rats."
+            "Deaths are now banal and the only hysteria that was left, is the fear of rats.",
+            "The cure do exist, but humanity is so disconnected that only a few have it."
         ],
         "delay": {
-            "8": "Press ENTER to continue."
+            "9": "Press ENTER to continue."
         }
+    },
+    "sd0001": {
+        "type": "story_dialogue",
+        "default_delay": 2,
+        "text": [
+            "You wake up inside an abandoned car you found in the woods.",
+            "You checked the sorroundings and you didn't any rats.",
+            "You are in search of a refuge called 'New Eden', the only place rummored to have the cure",
+            "You have been walking for days, but you still have a long way to go.",
+            "What do you do?"
+        ],
+        "delay": {}
     }
 }    
