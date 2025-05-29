@@ -1,4 +1,4 @@
-from json_tools import get_dict
+from modules.json_tools import get_dict
 
 classes_path: str = r"data/classes.json"
 

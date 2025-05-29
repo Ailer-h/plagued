@@ -1,7 +1,7 @@
-from player import Player
-import json_tools
-from class_handler import get_stats
-from input_handler import get_int
+from entities.player import Player
+import modules.json_tools as json_tools
+from modules.class_handler import get_stats
+from modules.input_handler import get_int
 import colorama
 from colorama import Fore
 

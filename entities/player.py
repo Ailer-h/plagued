@@ -1,4 +1,4 @@
-from class_handler import get_class
+from modules.class_handler import get_class
 
 # Player class for the game
 class Player:
