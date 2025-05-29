@@ -2,6 +2,7 @@ from entities.player import Player
 import modules.json_tools as json_tools
 from modules.class_handler import get_stats
 from modules.input_handler import get_int
+from modules.dialogueHandler import DialogueHandler
 import colorama
 from colorama import Fore
 
@@ -9,6 +10,8 @@ classes_path: str = r"data/classes.json"
 games_path: str = r"data/games.json"
 
 colorama.init(autoreset=True)
+
+dialogue_handler = DialogueHandler()
 
 # Function responsible for getting input on player info
 # STILL GOTTA EDIT IT
@@ -175,4 +178,8 @@ def menu():
 def run_game():
     game_data = menu()
 
-menu()
+# menu()
+
+dialogue_handler.set_dialogue_path("./data/story/story.json")
+# dialogue_handler.run_dialogue("ld0001")
+dialogue_handler.get_dialogue_info("ld0001")
