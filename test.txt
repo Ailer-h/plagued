@@ -1,0 +1,5 @@
+thats a dialogue line
+thats another
+and this is the third one
+
+and there was an empty line too

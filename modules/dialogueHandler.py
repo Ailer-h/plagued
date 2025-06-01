@@ -1,19 +1,27 @@
-from modules.json_tools import get_dict
+from modules.json_tools import get_dict, update_json
 from time import sleep
+from os import path
 
 class DialogueHandler:
 
     def __init__(self, dialogue_path: str | None = None) -> None:
-        self.dialogue_colors: dict = get_dict("./data/text_colors.json")
         self.dialogue_path: str | None = dialogue_path
 
-        if self.dialogue_path:
-            self.dialogue_db: dict = get_dict(self.dialogue_path)
-
-        else:
+        if not self.dialogue_path:
             self.dialogue_db: dict = {}
+            return
+
+        if not path.isfile(self.dialogue_path):
+            self.dialogue_db: dict = {}
+            return
+
+        self.dialogue_db: dict = get_dict(self.dialogue_path)
 
     def set_dialogue_path(self, dialogue_path: str) -> None:
+        if not path.isfile(dialogue_path):
+            print(f"File {dialogue_path} not found!")
+            return
+
         self.dialogue_path = dialogue_path
         self.dialogue_db = get_dict(self.dialogue_path)
 
@@ -41,6 +49,36 @@ class DialogueHandler:
             else:
                 sleep(delay)
 
+class DialogueEditor:
+
+    def __init__(self, dialogue_path: str | None = None) -> None:
+        self.dialogue_path: str | None = dialogue_path
+
+        if not self.dialogue_path:
+            self.dialogue_db: dict = {}
+            return
+
+        if not path.isfile(self.dialogue_path):
+            self.dialogue_db: dict = {}
+            return
+
+        self.dialogue_db: dict = get_dict(self.dialogue_path)
+
+    def set_dialogue_path(self, dialogue_path: str) -> None:
+        if not path.isfile(dialogue_path):
+            print(f"File {dialogue_path} not found!")
+            return
+
+        self.dialogue_path = dialogue_path
+        self.dialogue_db = get_dict(self.dialogue_path)
+
+    def reload_dialogue_db(self) -> None:
+        if not self.dialogue_path or not path.isfile(self.dialogue_path):
+            self.dialogue_db: dict = {}
+            return
+        
+        self.dialogue_db = get_dict(self.dialogue_path)
+
     def get_dialogue_info(self, dialogue_id: str) -> str:
         if dialogue_id not in self.dialogue_db.keys():
             print(f"Dialogue {dialogue_id} not found on the database.")
@@ -56,3 +94,49 @@ class DialogueHandler:
         ]
 
         return "\n".join(dialogue_info)
+
+    def get_dialogue_text(self, txt_path: str) -> list:
+        if not path.isfile(txt_path):
+            print(f"File {txt_path} not found!")
+            return []
+        
+        txt_lines = []
+
+        with open(txt_path, 'r', encoding='utf-8') as file:
+            txt_lines = file.readlines()
+
+        remove_breaks = lambda x: x.strip("\n")
+
+        txt_lines = list(filter(None,map(remove_breaks, txt_lines)))
+
+        return txt_lines
+
+
+    def create_dialogue(self, dialogue_id: str, dialogue_info: dict) -> None:
+        if dialogue_id in self.dialogue_db.keys():
+            print(f"Dialogue {dialogue_id} already exists. Use 'edit_dialogue' instead.")
+            return
+        
+        if not self.dialogue_path or not path.isfile(self.dialogue_path):
+            print("You don't have a valid dialogue database. Please create one first.")
+            return
+        
+        if "type" not in dialogue_info.keys():
+            dialogue_info['type'] = "generic_dialogue"
+
+        if "default_delay" not in dialogue_info.keys():
+            dialogue_info['default_delay'] = 1
+
+        if "delay" not in dialogue_info.keys():
+            dialogue_info['delay'] = {}
+
+        if "txt_path" not in dialogue_info.keys():
+            dialogue_info['text'] = []
+        
+        else:
+            dialogue_info['text'] = self.get_dialogue_text(dialogue_info['txt_path'])
+            dialogue_info.pop("txt_path", None)
+
+        self.dialogue_db[dialogue_id] = dialogue_info
+        update_json(self.dialogue_db, self.dialogue_path)
+        self.reload_dialogue_db()
