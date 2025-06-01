@@ -1,0 +1,18 @@
+{
+    "rarities_accepted": [
+        "common",
+        "uncommon",
+        "rare",
+        "legendary",
+
+        "special"
+
+    ],
+
+    "type_of_ammo": [
+        "short_bullet",
+        "long_bullet",
+        "arrow",
+        "bolt"
+    ]
+}
