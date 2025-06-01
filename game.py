@@ -186,6 +186,7 @@ def run_game():
         return
 
     if game['game_data']['time_played'] == 0:
+        dialogue_handler.set_skip_dialogue(True)
         dialogue_handler.run_dialogue("ld0001")
         dialogue_handler.run_dialogue("sd0001")
 

@@ -17,6 +17,7 @@ class DialogueHandler:
             return
 
         self.dialogue_db: dict = get_dict(self.dialogue_path)
+        self.skip_dialogues: bool = False
 
     #Sets the file that should be used to find the dialogues
     def set_dialogue_path(self, dialogue_path: str) -> None:
@@ -26,6 +27,9 @@ class DialogueHandler:
 
         self.dialogue_path = dialogue_path
         self.dialogue_db = get_dict(self.dialogue_path)
+
+    def set_skip_dialogue(self, skip_state: bool) -> None:
+        self.skip_dialogues = skip_state
 
     #Runs a dialogue from the database
     def run_dialogue(self, dialogue_id: str) -> None:
@@ -40,16 +44,13 @@ class DialogueHandler:
         for i, line in enumerate(dialogue['text']):
             print(line)
 
-            if str(i) not in dialogue['delay'].keys():
-                sleep(dialogue['default_delay'])
-                continue
-
-            delay = dialogue['delay'][str(i)]
+            default_delay = dialogue['default_delay']
+            delay: float | str = dialogue['delay'].get(str(i), default_delay)
 
             if isinstance(delay, str):
                 input(delay)
             
-            else:
+            elif not self.skip_dialogues:
                 sleep(delay)
 
 #Handles the process of creating dialogues
